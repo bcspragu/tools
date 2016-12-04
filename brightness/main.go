@@ -10,7 +10,7 @@ import (
 
 var (
 	vendor = flag.String("vendor", "intel_backlight", "The backlight vendor to modify")
-	amount = flag.Int("amount", 1, "Percentage to increase, decrease, or set the brightness")
+	amount = flag.Int("amount", 1, "Raw amount to increase, decrease, or set the brightness")
 	inc    = flag.Bool("inc", false, "Increment the brightness")
 	dec    = flag.Bool("dec", false, "Decrement the brightness")
 	set    = flag.Bool("set", false, "Set the brightness")
@@ -89,15 +89,15 @@ func getBrightness(filename string) (int, error) {
 }
 
 func (b *backlight) inc(i int) error {
-	return b.setBrightness(b.current + int(b.max*i/100.0))
+	return b.setBrightness(b.current + i)
 }
 
 func (b *backlight) dec(i int) error {
-	return b.setBrightness(b.current - int(b.max*i/100.0))
+	return b.setBrightness(b.current - i)
 }
 
 func (b *backlight) set(i int) error {
-	return b.setBrightness(int(b.max * i / 100.0))
+	return b.setBrightness(i)
 }
 
 func (b *backlight) setBrightness(i int) error {
