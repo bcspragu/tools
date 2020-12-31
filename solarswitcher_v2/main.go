@@ -44,7 +44,7 @@ func (s stateColorBody) Advance(txt string) (state, error) {
 }
 
 func main() {
-	xresources := filepath.Join(os.Getenv("HOME"), ".Xresources")
+	xresources := filepath.Join(os.Getenv("XDG_CONFIG_HOME"), "X11", "xresources")
 
 	fx, err := os.OpenFile(xresources, os.O_RDWR, 0640)
 	if err != nil {
